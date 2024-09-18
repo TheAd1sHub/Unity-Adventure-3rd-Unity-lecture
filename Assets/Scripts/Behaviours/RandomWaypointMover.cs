@@ -16,39 +16,7 @@ namespace MegaChaseGame.Behaviours
         private Moving _movingBehaviour;
         private Rotating _rotationBehaviour;
 
-        public Vector3 TargetDirection
-        {
-            get
-            {
-                //float movementX = _curTargetPosition.x - transform.position.x;
-                //
-                //float movementY = _curTargetPosition.y - transform.position.y;
-                //
-                //float movementZ = _curTargetPosition.z - transform.position.z;
-                //
-                //return new Vector3(movementX, movementY, movementZ);
-
-                return _curTargetPosition - transform.position;
-            }
-        }
-
-        public Vector3 RotationFromTarget
-        {
-            get
-            {
-                Vector3 result = _curTargetPosition - transform.rotation.eulerAngles;
-                // result.x = 0;
-                // result.z = 0;
-
-                return result;
-
-                //float rotationX = _movementConstraints.LockXRotation
-                //    ? 0
-                //    : transform.rotation.x - _curTargetPosition
-                //
-                //return new Vector3(rotationX, rotationY, rotationZ);
-            }
-        }
+        public Vector3 TargetDirection => _curTargetPosition - transform.position;
 
         public void Initialize(List<Transform> waypoints)
         {
@@ -83,7 +51,6 @@ namespace MegaChaseGame.Behaviours
         private void RotateTowardsCurTarget()
         {
             _rotationBehaviour.RotateTowards(TargetDirection, delta: Time.deltaTime);
-            
         }
 
         private void Awake()
@@ -110,7 +77,6 @@ namespace MegaChaseGame.Behaviours
             Debug.DrawLine(lineStart, lineEnd, Color.cyan);
             
             Gizmos.DrawSphere(_curTargetPosition, 0.1f);
-            
         }
 #endif
     }
